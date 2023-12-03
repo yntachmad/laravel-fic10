@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SoalController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('home');
 
     Route::resource('user', UserController::class);
+
+    Route::resource('soal', SoalController::class);
 
     // Route::get('/users' . function () {
     //     return view('pages.users.index');
