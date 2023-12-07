@@ -17,7 +17,11 @@ class UjianFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => $this->faker->numberBetween(1, 10),
+            'nilai_angka' => $this->faker->numberBetween(1, 100),
+            'nilai_verbal' => $this->faker->numberBetween(1, 100),
+            'nilai_logika' => $this->faker->numberBetween(1, 100),
+            'hasil' => $this->faker->randomElement(['Lulus', 'Tidak Lulus']),
         ];
     }
 }
