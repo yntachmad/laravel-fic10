@@ -20,17 +20,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Registration User
+//Registration User - post
 Route::post('/register', [AuthController::class, 'register']);
 
-//Login User
+//Login User - post
 Route::post('/login', [AuthController::class, 'login']);
 
-//Logout User
+//Logout User - post
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-//Create Ujian
+//Create Ujian - post
 Route::post('/create-ujian', [UjianController::class, 'createUjian'])->middleware('auth:sanctum');
 
 //get soal ujian
 Route::get('/get-soal-ujian', [UjianController::class, 'getListSoalByKategori'])->middleware('auth:sanctum');
+
+//Jawaban - post
+Route::post('/answers', [UjianController::class, 'jawabSoal'])->middleware('auth:sanctum');

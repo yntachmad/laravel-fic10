@@ -53,9 +53,9 @@ class UjianController extends Controller
 
     public function createUjian(Request $request)
     {
-        $soalAngka = Soal::where('kategori', 'Numeric')->inRandomOrder()->limit(10)->get();
-        $soalVerbal = Soal::where('kategori', 'Verbal')->inRandomOrder()->limit(10)->get();
-        $soalLogika = Soal::where('kategori', 'Logika')->inRandomOrder()->limit(10)->get();
+        $soalAngka = Soal::where('kategori', 'Numeric')->inRandomOrder()->limit(20)->get();
+        $soalVerbal = Soal::where('kategori', 'Verbal')->inRandomOrder()->limit(20)->get();
+        $soalLogika = Soal::where('kategori', 'Logika')->inRandomOrder()->limit(20)->get();
 
         $ujian = Ujian::create([
             'user_id' => $request->user()->id,
@@ -94,11 +94,14 @@ class UjianController extends Controller
     {
         $ujian = Ujian::where('user_id', $request->user()->id)->first();
         $ujianSoalList = UjianSoalList::where('ujian_id', $ujian->id)->get();
+        $ujianSoalListId = $ujianSoalList->pluck('soal_id');
 
-        $ujianSoalListId = [];
-        foreach ($ujianSoalList as $soal) {
-            array_push($ujianSoalListId, $soal->soal_id);
-        }
+        // dd($ujianSoalListId);
+
+        // $ujianSoalListId = [];
+        // foreach ($ujianSoalList as $soal) {
+        //     array_push($ujianSoalListId, $soal->soal_id);
+        // }
 
         $soal = Soal::whereIn('id', $ujianSoalListId)->where('kategori', $request->kategori)->get();
 
@@ -128,5 +131,10 @@ class UjianController extends Controller
             $ujianSoalList->kebenaran = false;
             $ujianSoalList->save();
         }
+
+        return response()->json([
+            'message' => 'Berhasil simpan jawaban',
+            'jawaban' => $ujianSoalList->kebenaran
+        ]);
     }
 }
