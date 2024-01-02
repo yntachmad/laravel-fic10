@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UjianController;
+use App\Http\Controllers\Api\ContentController;
+use App\Http\Controllers\Api\MateriController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +39,7 @@ Route::get('/get-soal-ujian', [UjianController::class, 'getListSoalByKategori'])
 
 //Jawaban - post
 Route::post('/answers', [UjianController::class, 'jawabSoal'])->middleware('auth:sanctum');
+
+Route::apiResource('/contents',ContentController::class)->middleware('auth:sanctum');
+
+Route::apiResource('/materis',MateriController::class)->middleware('auth:sanctum');
