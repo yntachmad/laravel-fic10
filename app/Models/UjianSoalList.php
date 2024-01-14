@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Soal;
+use App\Models\Ujian;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UjianSoalList extends Model
 {
@@ -14,4 +16,11 @@ class UjianSoalList extends Model
         'soal_id',
         'kebenaran',
     ];
+
+    public function soal(){
+        return $this->belongsTo(Soal::class);
+    }
+    public function ujian(){
+        return $this->belongsTo(Ujian::class);
+    }
 }

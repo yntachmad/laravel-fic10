@@ -37,6 +37,9 @@ Route::post('/create-ujian', [UjianController::class, 'createUjian'])->middlewar
 //get soal ujian
 Route::get('/get-soal-ujian', [UjianController::class, 'getListSoalByKategori'])->middleware('auth:sanctum');
 
+//get nilai
+Route::get('/get-nilai', [UjianController::class, 'hitungNilaiUjianByKategori'])->middleware('auth:sanctum');
+
 //Jawaban - post
 Route::post('/answers', [UjianController::class, 'jawabSoal'])->middleware('auth:sanctum');
 
