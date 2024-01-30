@@ -93,6 +93,13 @@ class UjianController extends Controller
     public function getListSoalByKategori(Request $request)
     {
         $ujian = Ujian::where('user_id', $request->user()->id)->first();
+        if(!$ujian){
+            return response()->json([
+             'message' => 'Ujian tidak ditemukan',
+             'data' => []
+            ], 200);
+
+        };
         $ujianSoalList = UjianSoalList::where('ujian_id', $ujian->id)->get();
         $ujianSoalListId = $ujianSoalList->pluck('soal_id');
 
@@ -121,6 +128,15 @@ class UjianController extends Controller
         ]);
 
         $ujian = Ujian::where('user_id', $request->user()->id)->first();
+        if(!$ujian){
+            return response()->json([
+             'message' => 'Ujian tidak ditemukan1',
+             'data' => []
+            ], 200);
+
+        };
+
+
         $ujianSoalList = UjianSoalList::where('ujian_id', $ujian->id)->where('soal_id', $validateData['soal_id'])->first();
         $soal = Soal::where('id', $validateData['soal_id'])->first();
 
@@ -135,13 +151,21 @@ class UjianController extends Controller
         return response()->json([
             'message' => 'Berhasil simpan jawaban',
             'jawaban' => $ujianSoalList->kebenaran
-        ]);
+        ],200);
     }
 
     public function hitungNilaiUjianByKategori(Request $request)
     {
         $kategori = $request->kategori;
         $ujian = Ujian::where('user_id', $request->user()->id)->first();
+        if(!$ujian){
+            return response()->json([
+             'message' => 'Ujian tidak ditemukan2',
+             'data' => []
+            ], 200);
+
+        };
+
         $ujianSoalList = UjianSoalList::where('ujian_id', $ujian->id)->get();
         // $ujianSoalListId = $ujianSoalList->pluck('soal_id');
 
@@ -172,7 +196,7 @@ class UjianController extends Controller
         return response()->json([
             'message' => 'Berhasil Mendapatkan Nilai',
             'nilai' => $nilai
-        ]);
+        ],200);
 
     }
 }
