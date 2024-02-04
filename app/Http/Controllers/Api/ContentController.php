@@ -20,7 +20,8 @@ class ContentController extends Controller
         return response()->json(
             [
             'status' => "Success",
-             'data' => $contents
+             'data' => $contents,
+             'data 2' => ''
              ]
         );
     }
